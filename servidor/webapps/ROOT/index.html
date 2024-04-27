@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../imagens/logo/logo_restaurante.png" type="image/x-icon">
+
+    <title>FoodFlow - Sistema de Gerenciamento</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .menu {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo img {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #333;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ff6347;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid #ff6347;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: #ff6347;
+        }
+
+      
+
+    
+
+        @media screen and (max-width: 768px) {
+            .logo img {
+                max-width: 100px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .btn {
+                font-size: 1em;
+                padding: 12px 24px;
+            }
+
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="menu">
+            <div class="logo">
+                <img src="../../imagens/logo/logo_restaurante.png" alt="Logo do Restaurante">
+            </div>
+            <h1>FoodFlow - Sistema de Gerenciamento</h1>
+            <p>Gerencie seu restaurante, lanchonete ou bar de forma eficiente e organizada!</p>
+            <a href="../Login/" class="btn">Comece Agora!</a>
+        </div>
+        
+    </div>
+</body>
+
+</html>
