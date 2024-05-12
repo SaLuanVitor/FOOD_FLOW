@@ -5,9 +5,9 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.springboot.models.Usuarios;
+import com.example.springboot.models.Funcionarios;
 
 @Repository
-public interface UserRepository extends JpaRepository<Usuarios, UUID> {
+public interface FuncRepository extends JpaRepository<Funcionarios, UUID> {
 
 }
