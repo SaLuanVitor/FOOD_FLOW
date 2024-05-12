@@ -20,6 +20,6 @@ public class Pedido implements Serializable {
     private UUID idMesa;
     private UUID idFuncionario;
     private String Status;
-    private DateTime tempo Preparo;
+    private DateTime tempoPreparo;
 
  
