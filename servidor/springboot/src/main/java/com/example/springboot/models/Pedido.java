@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.io.Serializable;
+import java.time.LocalTime;
 import java.util.UUID;
 
 @Entity
@@ -20,6 +21,42 @@ public class Pedido implements Serializable {
     private UUID idMesa;
     private UUID idFuncionario;
     private String Status;
-    private DateTime tempoPreparo;
+    private LocalTime tempoPreparo;
 
- 
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public UUID getIdMesa() {
+        return idMesa;
+    }
+
+    public void setIdMesa(UUID idMesa) {
+        this.idMesa = idMesa;
+    }
+
+    public UUID getIdFuncionario() {
+        return idFuncionario;
+    }
+
+    public void setIdFuncionario(UUID idFuncionario) {
+        this.idFuncionario = idFuncionario;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public LocalTime getTempoPreparo() {
+        return tempoPreparo;
+    }
+
+    public void setTempoPreparo(LocalTime tempoPreparo) {
+        this.tempoPreparo = tempoPreparo;
+    }
+
+}

@@ -6,8 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record FuncRecordsDto(@NotNull @NotBlank String nome, @NotNull @NotBlank String senha,
-                @NotNull @NotBlank String funcao,
-                String email,
-                @NotNull UUID idPefil) {
+        String funcao,
+        String email,
+        @NotNull UUID idPefil) {
 
 }

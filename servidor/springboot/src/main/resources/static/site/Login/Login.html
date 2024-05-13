@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../imagens/logo/logo_restaurante.png" type="image/x-icon">
+
+    <title>Login - FoodFlow</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .logo img {
+            max-width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 30%;
+            border: 5px solid #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #ff6347;
+            color: #fff;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 2px solid #ff6347;
+            transition: background-color 0.3s, color 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #fff;
+            color: #ff6347;
+        }
+
+        @media screen and (max-width: 768px) {
+            .logo img {
+                max-width: 80px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="../imagens/logo/logo_restaurante.png" alt="Logo do Restaurante">
+        </div>
+        <h2>FoodFlow</h2>
+        <form id="loginForm">
+            <input type="text" id="username" name="username" placeholder="Usuário" required>
+            <input type="password" id="password" name="password" placeholder="Senha" required>
+            <button class="btn" type="button" onclick="login()">Entrar</button>
+        </form>
+    </div>
+
+    <script>
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            var loginData = {
+                nome: username,
+                senha: password
+            };
+
+            // Enviar a requisição AJAX para o endpoint de login
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/login", true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert("Login bem-sucedido!");
+                    // Redirecionar para outra página ou executar outra ação após o login
+                } else if (xhr.readyState === 4 && xhr.status === 401) {
+                    alert("Senha incorreta!");
+                } else if (xhr.readyState === 4 && xhr.status === 404) {
+                    alert("Usuário não encontrado!");
+                }
+            };
+            xhr.send(JSON.stringify(loginData));
+        }
+    </script>
+
+</html>

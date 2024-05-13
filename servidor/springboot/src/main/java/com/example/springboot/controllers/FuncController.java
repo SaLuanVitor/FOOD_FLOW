@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.springboot.dto.FuncRecordsDto;
+import com.example.springboot.dto.LoginDto;
 import com.example.springboot.models.Funcionarios;
 import com.example.springboot.repositories.FuncRepository;
 
@@ -86,5 +87,35 @@ public class FuncController {
 
         return ResponseEntity.status(HttpStatus.OK).body("Funcionário deletado com sucesso!");
 
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Object> login(@RequestBody @Valid LoginDto loginDto) {
+        String nome = loginDto.nome();
+        String senha = loginDto.senha();
+
+        // Verificar se o nome de usuário e a senha foram fornecidos
+        if (nome == null || senha == null || nome.isEmpty() || senha.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nome de usuário e senha devem ser fornecidos.");
+        }
+
+        // Buscar o funcionário pelo nome de usuário (nome) no banco de dados
+        Optional<Funcionarios> funcionarioOpt = funcRepository.findByNome(nome);
+
+        // Verificar se o funcionário foi encontrado
+        if (funcionarioOpt.isPresent()) {
+            Funcionarios funcionario = funcionarioOpt.get();
+            // Verificar se a senha corresponde
+            if (senha.equals(funcionario.getSenha())) {
+                // Login bem-sucedido
+                return ResponseEntity.status(HttpStatus.OK).body("Login bem-sucedido!");
+            } else {
+                // Senha incorreta
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Senha incorreta!");
+            }
+        } else {
+            // Funcionário não encontrado
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado!");
+        }
     }
 }

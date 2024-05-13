@@ -69,7 +69,7 @@ public class PedController {
 
         var pedido = pedido0.get();
 
-        BeanUtils.copyProperties(pedfRecords, pedido);
+        BeanUtils.copyProperties(pedRecords, pedido);
         return ResponseEntity.status(HttpStatus.OK).body(pedRepository.save(pedido));
     }
 
