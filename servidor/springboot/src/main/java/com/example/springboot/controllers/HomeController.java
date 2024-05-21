@@ -8,11 +8,11 @@ public class HomeController {
 
     @GetMapping("/")
     public String index() {
-        return "index"; // Retorna o nome do template Thymeleaf/Freemarker
+        return "index"; // Correspondendo ao nome do arquivo index.html
     }
 
-    @GetMapping("/Login")
-    public String Login() {
-        return "index"; // Retorna o nome do template Thymeleaf/Freemarker
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // Correspondendo ao nome do arquivo login.html
     }
 }

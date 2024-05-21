@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../imagens/logo/logo_restaurante.png" type="image/x-icon">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Login - FoodFlow</title>
+    
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="../imagens/logo/logo_restaurante.png" alt="Logo do Restaurante">
+        </div>
+        <h2>FoodFlow</h2>
+        <form id="loginForm">
+            <input type="text" id="username" name="username" placeholder="Usuário" required>
+            <input type="password" id="password" name="password" placeholder="Senha" required>
+            <button class="btn" type="button" onclick="login()">Entrar</button>
+        </form>
+    </div>
+    <div class="popup-container" id="popup-container">
+        <div class="popup">
+            <span class="close-icon" onclick="hidePopup()">X</span>
+            <div class="popup-message" id="popup-message">
+                Mensagem de popup aqui
+                <!-- Adiciona a barra de progresso dentro da mensagem -->
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+    <script src="/js/login.js"></script>
+</body>
+
+</html>
