@@ -1,0 +1,129 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+.container {
+    max-width: 500px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.logo img {
+    max-width: 120px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 30%;
+    border: 5px solid #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #ff6347;
+    color: #fff;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    text-decoration: none;
+    border-radius: 50px;
+    border: 2px solid #ff6347;
+    transition: background-color 0.3s, color 0.3s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #fff;
+    color: #ff6347;
+}
+
+
+
+/* Estilos para a barra de progresso */
+.progress-bar {
+    height: 5px;
+    background-color: #ff6347; /* Cor da barra de progresso */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    animation: progress 3s linear; /* Animação de progresso com duração de 3 segundos */
+}
+
+@keyframes progress {
+    0% {
+        width: 100%; /* Inicia com largura total */
+    }
+    100% {
+        width: 0%; /* Termina com largura zero */
+    }
+}
+
+
+/* Estilos adicionais para o popup */
+.popup-container.active {
+    display: block;
+}
+
+.close-icon {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.popup-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 20px;
+    display: none;
+    z-index: 9999;
+}
+
+.popup-message {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.close-icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .logo img {
+        max-width: 80px;
+    }
+
+    h2 {
+        font-size: 1.5em;
+    }
+}
