@@ -28,6 +28,7 @@ function login() {
                 // Login bem-sucedido, exibe popup com mensagem e fecha em 3 segundos
                 showPopup("Login bem-sucedido!");
                 startTimer(); // Inicia o temporizador
+                redirectToPedidos();
             } else if (xhr.status === 401) {
                 // Senha incorreta
                 showPopup("Senha incorreta! Por favor, tente novamente.");
@@ -40,6 +41,10 @@ function login() {
         }
     };
     xhr.send(JSON.stringify(loginData));
+}
+
+function redirectToPedidos(){
+    window.location = '/pedidos';
 }
 
 function showPopup(message) {

@@ -1,32 +1,35 @@
 package com.example.springboot.models;
 
-import jakarta.persistence.Table;
+import java.io.Serializable;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-import java.io.Serializable;
-import java.util.UUID;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "GER_MENU")
 
 public class Menu implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idMenu;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idMenu;
     private String titulo;
     private String descricao;
     private Double preco;
+    @ManyToMany(mappedBy = "itensMenu")
+    Set<Pedido> pedidos;
 
-    public UUID getIdMenu() {
+    public Long getIdMenu() {
         return idMenu;
     }
 
-    public void setIdMenu(UUID idMenu) {
+    public void setIdMenu(Long idMenu) {
         this.idMenu = idMenu;
     }
 
@@ -64,8 +67,18 @@ public class Menu implements Serializable {
 
     private Boolean ativo;
 
-    public static long getSerialversionuid() {
+    public static Long getSerialversionuid() {
         return serialVersionUID;
     }
+
+    public Set<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(Set<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+    
 
 }

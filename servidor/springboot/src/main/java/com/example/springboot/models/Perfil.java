@@ -7,28 +7,27 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "GER_PERFIL")
 
 public class Perfil implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idPerfil;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idPerfil;
     private String descricao;
 
-    public static long getSerialversionuid() {
+    public static Long getSerialversionuid() {
         return serialVersionUID;
     }
 
-    public UUID getIdPerfil() {
+    public Long getIdPerfil() {
         return idPerfil;
     }
 
-    public void setIdPerfil(UUID idPerfil) {
+    public void setIdPerfil(Long idPerfil) {
         this.idPerfil = idPerfil;
     }
 

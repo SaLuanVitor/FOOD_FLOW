@@ -2,92 +2,73 @@ package com.example.springboot.controllers;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.example.springboot.dto.FuncRecordsDto;
-import com.example.springboot.dto.LoginDto;
-import com.example.springboot.models.Funcionarios;
-import com.example.springboot.repositories.FuncRepository;
-
-import jakarta.validation.Valid;
-
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
 
-@RestController
+import com.example.springboot.dto.LoginDto;
+import com.example.springboot.models.Funcionarios;
+import com.example.springboot.models.Perfil;
+import com.example.springboot.repositories.FuncRepository;
+import com.example.springboot.repositories.PerfRepository;
+
+import jakarta.validation.Valid;
+
+@Controller
 public class FuncController {
 
     @Autowired
     FuncRepository funcRepository;
+    @Autowired
+    PerfRepository perfilRepository;
+    private Funcionarios funcionarioLogado;
 
-    // POST PARA CRIAR Funcionário
-    @PostMapping("/funcionarios")
-    public ResponseEntity<Funcionarios> saveFunc(@RequestBody @Valid FuncRecordsDto FuncRecordsDto) {
-
-        var Funcionarios = new Funcionarios();
-
-        BeanUtils.copyProperties(FuncRecordsDto, Funcionarios);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(funcRepository.save(Funcionarios));
+    @GetMapping("/funcionarios") //rota
+    public String getAllFuncionariosPage(final Model model) {
+        List<Funcionarios> funcionarios =  funcRepository.findAll();
+        model.addAttribute("funcionarios",funcionarios);
+        return "funcionarios/funcionarios"; //html
     }
 
-    // GET PARA OBTER TODOS OS FuncionárioS
-    @GetMapping("/funcionarios")
-    public ResponseEntity<List<Funcionarios>> getAllFuncs() {
-        return ResponseEntity.status(HttpStatus.OK).body(funcRepository.findAll());
+     @GetMapping("/funcionarios/adicionar")
+    public String addNewFuncionario(Model model) {
+        Funcionarios funcionario = new Funcionarios();
+        List<Perfil> perfis = perfilRepository.findAll();
+        model.addAttribute("funcionario", funcionario);
+        model.addAttribute("perfis",perfis);
+        return "funcionarios/adicionar";
+    }
+ 
+    @PostMapping("/funcionarios/salvar")
+    public String saveFuncionario(@ModelAttribute("funcionario") Funcionarios funcionario) {
+        funcRepository.save(funcionario);
+        return "redirect:/funcionarios";
     }
 
-    // GET PARA OBTER UM ÚNICO Funcionário
-
-    @GetMapping("funcionarios/{id}")
-    public ResponseEntity<Object> getOneFunc(@PathVariable(value = "id") UUID id) {
-        Optional<Funcionarios> funcioario0 = funcRepository.findById(id);
-        if (funcioario0.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Funcionário não encontrado");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body(funcioario0.get());
+     @GetMapping("/funcionarios/atualizar/{id}")
+    public String updateFuncionario(@PathVariable(value = "id") Long id, Model model) {
+        Funcionarios funcionario = funcRepository.findById(id).get();
+        List<Perfil> perfis = perfilRepository.findAll();
+        model.addAttribute("perfis",perfis);
+        model.addAttribute("funcionario", funcionario);
+        return "funcionarios/atualizar";
+    }
+ 
+    @GetMapping("/funcionarios/excluir/{id}")
+    public String deleteFuncionarioById(@PathVariable(value = "id") Long id) {
+        funcRepository.deleteById(id);
+        return "redirect:/funcionarios";
+ 
     }
 
-    // PUT PARA ALTERAR DADOS
-
-    @PutMapping("funcionarios/{id}")
-    public ResponseEntity<Object> updateFuncionario(@PathVariable(value = "id") UUID id,
-            @RequestBody @Valid FuncRecordsDto funcioarioRecords) {
-        Optional<Funcionarios> funcioario0 = funcRepository.findById(id);
-        if (funcioario0.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Funcionário não encontrado");
-        }
-
-        var funcioario = funcioario0.get();
-
-        BeanUtils.copyProperties(funcioarioRecords, funcioario);
-        return ResponseEntity.status(HttpStatus.OK).body(funcRepository.save(funcioario));
-    }
-
-    // DELETE PARA DELETAR Funcionarios
-
-    @DeleteMapping("funcionarios/{id}")
-    public ResponseEntity<Object> deleteFuncioario(@PathVariable(value = "id") UUID id) {
-        Optional<Funcionarios> funcioario0 = funcRepository.findById(id);
-        if (funcioario0.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Funcionário não encontrado");
-        }
-
-        funcRepository.delete(funcioario0.get());
-
-        return ResponseEntity.status(HttpStatus.OK).body("Funcionário deletado com sucesso!");
-
-    }
 
     @PostMapping("/login")
     public ResponseEntity<Object> login(@RequestBody @Valid LoginDto loginDto) {
@@ -108,6 +89,7 @@ public class FuncController {
             // Verificar se a senha corresponde
             if (senha.equals(funcionario.getSenha())) {
                 // Login bem-sucedido
+                funcionarioLogado = funcionario;
                 return ResponseEntity.status(HttpStatus.OK).body("Login bem-sucedido!");
             } else {
                 // Senha incorreta
@@ -117,5 +99,9 @@ public class FuncController {
             // Funcionário não encontrado
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado!");
         }
+    }
+
+    public Funcionarios getFuncionarioLogado() {
+        return funcionarioLogado;
     }
 }

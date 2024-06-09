@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.example.springboot.models.Perfil;
 
 @Repository
-public interface PerfRepository extends JpaRepository<Perfil, UUID> {
+public interface PerfRepository extends JpaRepository<Perfil, Long> {
 
 }

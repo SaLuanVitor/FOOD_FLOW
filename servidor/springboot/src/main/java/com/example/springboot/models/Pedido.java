@@ -1,46 +1,72 @@
 package com.example.springboot.models;
 
-import jakarta.persistence.Table;
+import java.io.Serializable;
+import java.time.LocalTime;
+import java.util.Set;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-import java.io.Serializable;
-import java.time.LocalTime;
-import java.util.UUID;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "GER_PEDIDO")
 
 public class Pedido implements Serializable {
-    private static final long serialVersionUID = 1L;
+
+    private static final Long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idMesa;
-    private UUID idFuncionario;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idPedido;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idMesa")
+    private Mesa mesa;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "idFuncionario")
+    private Funcionarios funcionario;
     private String Status;
     private LocalTime tempoPreparo;
 
-    public static long getSerialversionuid() {
+    @ManyToMany
+    @JoinTable(
+            name = "pedido_item_menu",
+            joinColumns = @JoinColumn(name = "idPedido"),
+            inverseJoinColumns = @JoinColumn(name = "idMenu"))
+    Set<Menu> itensMenu;
+
+    public static Long getSerialversionuid() {
         return serialVersionUID;
     }
 
-    public UUID getIdMesa() {
-        return idMesa;
+    public Long getIdPedido() {
+        return idPedido;
     }
 
-    public void setIdMesa(UUID idMesa) {
-        this.idMesa = idMesa;
+    public void setIdPedido(Long idPedido) {
+        this.idPedido = idPedido;
     }
 
-    public UUID getIdFuncionario() {
-        return idFuncionario;
+    public Mesa getMesa() {
+        return mesa;
     }
 
-    public void setIdFuncionario(UUID idFuncionario) {
-        this.idFuncionario = idFuncionario;
+    public void setMesa(Mesa mesa) {
+        this.mesa = mesa;
+    }
+
+    public Funcionarios getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionarios funcionario) {
+        this.funcionario = funcionario;
     }
 
     public String getStatus() {
@@ -58,5 +84,15 @@ public class Pedido implements Serializable {
     public void setTempoPreparo(LocalTime tempoPreparo) {
         this.tempoPreparo = tempoPreparo;
     }
+
+    public Set<Menu> getItensMenu() {
+        return itensMenu;
+    }
+
+    public void setItensMenu(Set<Menu> itensMenu) {
+        this.itensMenu = itensMenu;
+    }
+
+    
 
 }

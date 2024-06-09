@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.example.springboot.models.Mesa;
 
 @Repository
-public interface MesaRepository extends JpaRepository<Mesa, UUID> {
+public interface MesaRepository extends JpaRepository<Mesa, Long> {
 
 }
