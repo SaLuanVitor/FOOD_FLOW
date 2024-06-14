@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.example.springboot.models.PedidoMenu;
 
 @Repository
-public interface PedidoMenuRepository extends JpaRepository<PedidoMenu, UUID> {
+public interface PedidoMenuRepository extends JpaRepository<PedidoMenu, Long> {
 
 }

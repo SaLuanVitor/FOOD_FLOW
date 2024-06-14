@@ -1,29 +1,41 @@
 package com.example.springboot.models;
 
-import jakarta.persistence.Table;
+import java.io.Serializable;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-import java.util.UUID;
-
-import java.io.Serializable;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "GER_FUNCIONARIO")
 
 public class Funcionarios implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idFuncionario;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idFuncionario;
     private String nome;
     private String senha;
     private String funcao;
     private String email;
-    private UUID idPefil;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="idPerfil")
+    private Perfil perfil;
+
+    public Long getidFuncionario() {
+        return idFuncionario;
+    }
+
+    public void setIidFuncionario(Long idFuncionario) {
+        this.idFuncionario = idFuncionario;
+    }
+
 
     public String getFuncao() {
         return funcao;
@@ -41,22 +53,8 @@ public class Funcionarios implements Serializable {
         this.email = email;
     }
 
-    public UUID getidPefil() {
-        return idPefil;
-    }
 
-    public void setidPefil(UUID idPefil) {
-        this.idPefil = idPefil;
-    }
-
-    public UUID getidFuncionario() {
-        return idFuncionario;
-    }
-
-    public void setIidFuncionario(UUID idFuncionario) {
-        this.idFuncionario = idFuncionario;
-    }
-
+   
     public String getNome() {
         return nome;
     }
@@ -65,7 +63,7 @@ public class Funcionarios implements Serializable {
         this.nome = nome;
     }
 
-    public static long getSerialversionuid() {
+    public static Long getSerialversionuid() {
         return serialVersionUID;
     }
 
@@ -75,6 +73,22 @@ public class Funcionarios implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public Long getIdFuncionario() {
+        return idFuncionario;
+    }
+
+    public void setIdFuncionario(Long idFuncionario) {
+        this.idFuncionario = idFuncionario;
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
 }

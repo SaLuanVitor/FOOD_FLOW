@@ -49,7 +49,7 @@ public class PerfilController {
     // GET PARA OBTER UM ÚNICO Perfil
 
     @GetMapping("Perfil/{id}")
-    public ResponseEntity<Object> getOnePerfil(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOnePerfil(@PathVariable(value = "id") Long id) {
         Optional<Perfil> perfil0 = perfRepository.findById(id);
         if (perfil0.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Perfil não encontrado");
@@ -60,7 +60,7 @@ public class PerfilController {
     // PUT PARA ALTERAR DADOS
 
     @PutMapping("Perfil/{id}")
-    public ResponseEntity<Object> updatePerfil(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Object> updatePerfil(@PathVariable(value = "id") Long id,
             @RequestBody @Valid PerfRecordsDto perfiPerfRecords) {
         Optional<Perfil> perfil0 = perfRepository.findById(id);
         if (perfil0.isEmpty()) {
@@ -76,7 +76,7 @@ public class PerfilController {
     // DELETE PARA DELETAR Perfil
 
     @DeleteMapping("Perfil/{id}")
-    public ResponseEntity<Object> deletePerfil(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deletePerfil(@PathVariable(value = "id") Long id) {
         Optional<Perfil> perfil0 = perfRepository.findById(id);
         if (perfil0.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Perfil não encontrado");

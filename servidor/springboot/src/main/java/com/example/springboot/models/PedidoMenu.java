@@ -13,39 +13,39 @@ import java.util.UUID;
 @Table(name = "GER_PEDIDO_MENU")
 
 public class PedidoMenu implements Serializable {
-    private static final long serialVersionUID = 1L;
+    private static final Long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID idPedidoMenu;
-    private UUID idPedido;
-    private UUID idMenu;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long idPedidoMenu;
+    private Long idPedido;
+    private Long idMenu;
 
-    public static long getSerialversionuid() {
+    public static Long getSerialversionuid() {
         return serialVersionUID;
     }
 
-    public UUID getIdPedidoMenu() {
+    public Long getIdPedidoMenu() {
         return idPedidoMenu;
     }
 
-    public void setIdPedidoMenu(UUID idPedidoMenu) {
+    public void setIdPedidoMenu(Long idPedidoMenu) {
         this.idPedidoMenu = idPedidoMenu;
     }
 
-    public UUID getIdPedido() {
+    public Long getIdPedido() {
         return idPedido;
     }
 
-    public void setIdPedido(UUID idPedido) {
+    public void setIdPedido(Long idPedido) {
         this.idPedido = idPedido;
     }
 
-    public UUID getIdMenu() {
+    public Long getIdMenu() {
         return idMenu;
     }
 
-    public void setIdMenu(UUID idMenu) {
+    public void setIdMenu(Long idMenu) {
         this.idMenu = idMenu;
     }
 

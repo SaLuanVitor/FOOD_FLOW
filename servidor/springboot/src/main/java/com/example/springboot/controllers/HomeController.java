@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping("/")
-    public String index() {
-        return "index"; // Correspondendo ao nome do arquivo index.html
+    public String home() {
+        return "home"; // Correspondendo ao nome do arquivo home.html
     }
 
     @GetMapping("/login")

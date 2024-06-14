@@ -50,7 +50,7 @@ public class PedidoMenuController {
     // GET PARA OBTER UM ÚNICO PedidoMenu
 
     @GetMapping("PedidoMenu/{id}")
-    public ResponseEntity<Object> getOnePedidoMenu(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> getOnePedidoMenu(@PathVariable(value = "id") Long id) {
         Optional<PedidoMenu> PedidoMenu0 = pedidoMenuRepository.findById(id);
         if (PedidoMenu0.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("PedidoMenu não encontrado");
@@ -61,7 +61,7 @@ public class PedidoMenuController {
     // PUT PARA ALTERAR DADOS
 
     @PutMapping("PedidoMenu/{id}")
-    public ResponseEntity<Object> updatePedidoMenu(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Object> updatePedidoMenu(@PathVariable(value = "id") Long id,
             @RequestBody @Valid PedidoMenuRecordsDto pedidoMenuRecords) {
         Optional<PedidoMenu> PedidoMenu0 = pedidoMenuRepository.findById(id);
         if (PedidoMenu0.isEmpty()) {
@@ -77,7 +77,7 @@ public class PedidoMenuController {
     // DELETE PARA DELETAR PedidoMenu
 
     @DeleteMapping("PedidoMenu/{id}")
-    public ResponseEntity<Object> deletePedidoMenu(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<Object> deletePedidoMenu(@PathVariable(value = "id") Long id) {
         Optional<PedidoMenu> PedidoMenu0 = pedidoMenuRepository.findById(id);
         if (PedidoMenu0.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("PedidoMenu não encontrado");
