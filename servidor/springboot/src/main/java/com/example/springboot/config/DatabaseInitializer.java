@@ -22,7 +22,7 @@ public class DatabaseInitializer {
     @Bean
     CommandLineRunner initDatabase() {
         return args -> {
-            String adminNome = "adminFloow";
+            String adminNome = "adminFlow";
             String adminSenha = "floow123";
             String perfilDescricao = "Administrador";
 
@@ -33,11 +33,11 @@ public class DatabaseInitializer {
                 perfilAdmin.setDescricao(perfilDescricao);
                 perfilAdmin = perfilRepository.save(perfilAdmin);
 
-                System.out.println("Perfil Administrador criado com sucesso!");
+                System.out.println("Perfil " + perfilDescricao + " criado com sucesso!");
             } else {
                 perfilAdmin = perfilRepository.findByDescricao(perfilDescricao).get();
 
-                System.out.println("Perfil Administrador já existe. Usando perfil existente.");
+                System.out.println("Perfil " + perfilDescricao + " já existe. Usando perfil existente.");
             }
 
             if (funcionariosRepository.findByNome(adminNome).isEmpty()) {
@@ -49,9 +49,9 @@ public class DatabaseInitializer {
                 admin.setPerfil(perfilAdmin);
                 funcionariosRepository.save(admin);
 
-                System.out.println("Funcionário adminFloow criado com sucesso!");
+                System.out.println("Funcionário " + adminNome + " criado com sucesso!");
             } else {
-                System.out.println("Funcionário adminFloow já existe. Nenhuma ação necessária.");
+                System.out.println("Funcionário " + adminNome + " já existe. Nenhuma ação necessária.");
             }
         };
     }
