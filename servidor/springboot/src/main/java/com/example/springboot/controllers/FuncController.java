@@ -20,6 +20,7 @@ import com.example.springboot.models.Perfil;
 import com.example.springboot.repositories.FuncRepository;
 import com.example.springboot.repositories.PerfRepository;
 
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -31,50 +32,49 @@ public class FuncController {
     PerfRepository perfilRepository;
     private Funcionarios funcionarioLogado;
 
-    @GetMapping("/funcionarios") //rota
+    @GetMapping("/funcionarios") // rota
     public String getAllFuncionariosPage(final Model model) {
-        List<Funcionarios> funcionarios =  funcRepository.findAll();
-        model.addAttribute("funcionarios",funcionarios);
-        return "funcionarios/funcionarios"; //html
+        List<Funcionarios> funcionarios = funcRepository.findAll();
+        model.addAttribute("funcionarios", funcionarios);
+        return "funcionarios/funcionarios"; // html
     }
 
-     @GetMapping("/funcionarios/adicionar")
+    @GetMapping("/funcionarios/adicionar")
     public String addNewFuncionario(Model model) {
         Funcionarios funcionario = new Funcionarios();
         List<Perfil> perfis = perfilRepository.findAll();
         model.addAttribute("funcionario", funcionario);
-        model.addAttribute("perfis",perfis);
+        model.addAttribute("perfis", perfis);
         return "funcionarios/adicionar";
     }
- 
+
     @PostMapping("/funcionarios/salvar")
     public String saveFuncionario(@ModelAttribute("funcionario") Funcionarios funcionario) {
         funcRepository.save(funcionario);
         return "redirect:/funcionarios";
     }
 
-     @GetMapping("/funcionarios/atualizar/{id}")
+    @GetMapping("/funcionarios/atualizar/{id}")
     public String updateFuncionario(@PathVariable(value = "id") Long id, Model model) {
         Funcionarios funcionario = funcRepository.findById(id).get();
         List<Perfil> perfis = perfilRepository.findAll();
-        model.addAttribute("perfis",perfis);
+        model.addAttribute("perfis", perfis);
         model.addAttribute("funcionario", funcionario);
         return "funcionarios/atualizar";
     }
- 
+
     @GetMapping("/funcionarios/excluir/{id}")
     public String deleteFuncionarioById(@PathVariable(value = "id") Long id) {
         funcRepository.deleteById(id);
         return "redirect:/funcionarios";
- 
+
     }
 
-
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody @Valid LoginDto loginDto) {
+    public ResponseEntity<Object> login(@RequestBody @Valid LoginDto loginDto,  HttpSession session) {
         String nome = loginDto.nome();
         String senha = loginDto.senha();
-
+        session.setAttribute("logado", nome);
         // Verificar se o nome de usuário e a senha foram fornecidos
         if (nome == null || senha == null || nome.isEmpty() || senha.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nome de usuário e senha devem ser fornecidos.");

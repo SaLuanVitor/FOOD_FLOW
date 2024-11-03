@@ -44,7 +44,7 @@ function login() {
 }
 
 function redirectToPedidos(){
-    window.location = '/pedidos';
+    window.location = '/home';
 }
 
 function showPopup(message) {

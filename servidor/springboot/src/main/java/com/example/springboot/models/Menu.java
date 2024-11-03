@@ -1,6 +1,7 @@
 package com.example.springboot.models;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Set;
 
 import jakarta.persistence.Entity;
@@ -21,7 +22,7 @@ public class Menu implements Serializable {
     private Long idMenu;
     private String titulo;
     private String descricao;
-    private Double preco;
+    private BigDecimal preco;
     @ManyToMany(mappedBy = "itensMenu")
     Set<Pedido> pedidos;
 
@@ -49,11 +50,11 @@ public class Menu implements Serializable {
         this.descricao = descricao;
     }
 
-    public Double getPreco() {
+    public BigDecimal getPreco() {
         return preco;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
 

@@ -10,13 +10,14 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <link rel="apple-touch-icon" sizes="76x76" th:href="@{/img/apple-icon.png}">
   <link rel="icon" type="image/png" th:href="@{/img/favicon.png}">
   <title>
-    Food Flow
+    Food Flow's
   </title>
   <!--     Fonts and icons     -->
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
   <!-- Nucleo Icons -->
   <link th:href="@{/css/nucleo-icons.css}" rel="stylesheet" />
   <link th:href="@{/css/nucleo-svg.css}" rel="stylesheet" />
+  <link th:href="@{/css/styles.css}" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- Material Icons -->
@@ -32,9 +33,9 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="/pedidos" target="_blank">
-        <img th:src="@{/img/logo-ct.png}" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold text-white">Food Flow</span>
+      <a class="navbar-brand m-0" href="/home" target="_blank">
+        <img th:src="@{/img/logo.png}" class="navbar-brand-img h-100" alt="main_logo">
+        <span class="ms-1 font-weight-bold text-white">Food Flow's</span>
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
@@ -110,7 +111,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
             <li class="nav-item d-flex align-items-center">
               <a th:href="@{/sign-in}" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
+                <span class="d-sm-inline d-none"></span>
               </a>
             </li>
           </ul>
@@ -121,17 +122,17 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <div class="container-fluid py-4">
       <div class="card-body">
         <form action="#" th:action="@{/mesas/salvar}" th:object="${mesa}" method="POST" role="form" class="text-start">
+          <label>Número da mesa</label>
           <div class="input-group input-group-outline my-3">
-            <input type="hidden" th:field="*{idMesa}" />
-            <label class="form-label">Número da mesa</label>
+            <input type="hidden" th:field="*{idMesa}" />         
             <input type="number" th:field="*{numeroMesa}" class="form-control">
           </div>
+          <label>Capacidade</label>
           <div class="input-group input-group-outline mb-3">
-            <label class="form-label">Capacidade</label>
             <input type="number" th:field="*{capacidade}" class="form-control">
           </div>
           <div class="text-center">
-            <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Salvar</button>
+            <button type="submit" class="btn bg-danger w-100 my-4 mb-2">Salvar</button>
           </div>
         </form>
       </div>
