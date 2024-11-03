@@ -1,0 +1,24 @@
+.btn.btn-primary {
+    background-color: #1e75b3;
+    color: white;
+    border: none;
+    box-shadow: none;
+}
+
+.btn.btn-danger {
+    background-color: #c70038;
+    color: white;
+    border: none;
+    box-shadow: none;
+}
+
+.btn.bg-danger{
+    background-color: #c70038 !important;
+    color: white;
+}
+
+.nav-link.text-white.active.bg-danger{
+    background-color: #AF6913 !important;
+    border: none;
+    box-shadow: none;
+}
