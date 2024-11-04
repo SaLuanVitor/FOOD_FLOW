@@ -35,10 +35,7 @@ public class Pedido implements Serializable {
     private LocalTime tempoPreparo;
 
     @ManyToMany
-    @JoinTable(
-            name = "pedido_item_menu",
-            joinColumns = @JoinColumn(name = "idPedido"),
-            inverseJoinColumns = @JoinColumn(name = "idMenu"))
+    @JoinTable(name = "pedido_item_menu", joinColumns = @JoinColumn(name = "idPedido"), inverseJoinColumns = @JoinColumn(name = "idMenu"))
     Set<Menu> itensMenu;
 
     public static Long getSerialversionuid() {
@@ -93,6 +90,9 @@ public class Pedido implements Serializable {
         this.itensMenu = itensMenu;
     }
 
-    
+    public Object getAuthority() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getAuthority'");
+    }
 
 }

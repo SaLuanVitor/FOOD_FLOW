@@ -25,10 +25,16 @@ function login() {
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             if (xhr.status === 200) {
-                // Login bem-sucedido, exibe popup com mensagem e fecha em 3 segundos
-                showPopup("Login bem-sucedido!");
-                startTimer(); // Inicia o temporizador
-                redirectToPedidos();
+                // Parse da resposta JSON para obter a descrição
+                var response = JSON.parse(xhr.responseText);
+
+                // Verifica o valor de descricao dentro de perfil e redireciona conforme necessário
+                if (response.perfil && response.perfil.descricao === "mesa") {
+                    // session.setAttribute("mesa", response.funcao);
+                    window.location.href = "/acompanharPedidos";
+                } else {
+                    window.location.href = "/home";
+                }
             } else if (xhr.status === 401) {
                 // Senha incorreta
                 showPopup("Senha incorreta! Por favor, tente novamente.");
@@ -42,6 +48,7 @@ function login() {
     };
     xhr.send(JSON.stringify(loginData));
 }
+
 
 function redirectToPedidos(){
     window.location = '/home';

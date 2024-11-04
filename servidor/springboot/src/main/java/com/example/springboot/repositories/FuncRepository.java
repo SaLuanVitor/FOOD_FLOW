@@ -13,4 +13,6 @@ import com.example.springboot.models.Funcionarios;
 public interface FuncRepository extends JpaRepository<Funcionarios, Long> {
     @Query("SELECT f FROM Funcionarios f WHERE f.nome = :nome")
     Optional<Funcionarios> findByNome(String nome);
+
+    Optional<Funcionarios> findByNomeAndSenha(String nome, String senha);
 }

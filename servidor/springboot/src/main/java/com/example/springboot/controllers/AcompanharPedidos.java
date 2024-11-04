@@ -10,4 +10,5 @@ public class AcompanharPedidos {
     public String acompanharPedidos() {
         return "acompanharPedidos/acompanharPedidos";
     }
+    // session.setAttribute("logado", nome);
 }

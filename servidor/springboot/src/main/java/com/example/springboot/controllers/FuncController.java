@@ -1,6 +1,7 @@
 package com.example.springboot.controllers;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,10 +72,10 @@ public class FuncController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Object> login(@RequestBody @Valid LoginDto loginDto,  HttpSession session) {
+    public ResponseEntity<Object> login(@RequestBody @Valid LoginDto loginDto, HttpSession session) {
         String nome = loginDto.nome();
         String senha = loginDto.senha();
-        session.setAttribute("logado", nome);
+
         // Verificar se o nome de usuário e a senha foram fornecidos
         if (nome == null || senha == null || nome.isEmpty() || senha.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nome de usuário e senha devem ser fornecidos.");
@@ -90,7 +91,17 @@ public class FuncController {
             if (senha.equals(funcionario.getSenha())) {
                 // Login bem-sucedido
                 funcionarioLogado = funcionario;
-                return ResponseEntity.status(HttpStatus.OK).body("Login bem-sucedido!");
+                session.setAttribute("logado", nome);
+
+                // Verificar o perfil do usuário
+                Perfil perfil = funcionario.getPerfil(); // Supondo que exista um método getPerfil() na sua classe
+                                                         // Funcionarios
+                return ResponseEntity.status(HttpStatus.OK).body(Map.of(
+                        "mensagem", "Login bem-sucedido!",
+                        "perfil", perfil, // Incluindo o perfil no retorno
+                        "funcao", funcionario.getFuncao()
+
+                ));
             } else {
                 // Senha incorreta
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Senha incorreta!");

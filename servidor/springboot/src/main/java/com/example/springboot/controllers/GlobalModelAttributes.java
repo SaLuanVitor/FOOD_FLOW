@@ -14,6 +14,9 @@ public class GlobalModelAttributes {
     public void addGlobalAttributes(HttpSession session, Model model) {
         Object logado = session.getAttribute("logado");
         model.addAttribute("logado", logado);
+
+        Object mesa = session.getAttribute("mesa");
+        model.addAttribute("mesa", mesa);
     }
 
 }
