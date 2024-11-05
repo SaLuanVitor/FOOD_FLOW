@@ -1,28 +1,23 @@
 package com.example.springboot.models;
 
 import java.io.Serializable;
-import java.util.UUID;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "GER_MESA")
-
 public class Mesa implements Serializable {
- 
+
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idMesa;
+
+    @Column(name = "numero_mesa")
     private int numeroMesa;
+
+    @Column(name = "capacidade")
     private int capacidade;
-    private boolean disponivel;
-
-
 
     public int getCapacidade() {
         return capacidade;
@@ -40,14 +35,6 @@ public class Mesa implements Serializable {
         this.numeroMesa = numeroMesa;
     }
 
-    public boolean isDisponivel() {
-        return disponivel;
-    }
-
-    public void setDisponivel(boolean disponivel) {
-        this.disponivel = disponivel;
-    }
-
     public Long getIdMesa() {
         return idMesa;
     }
@@ -56,6 +43,24 @@ public class Mesa implements Serializable {
         this.idMesa = idMesa;
     }
 
+    @Override
+    public String toString() {
+        return "Mesa [idMesa=" + idMesa + ", numeroMesa=" + numeroMesa + ", capacidade=" + capacidade + ", disponivel="
+                + "]";
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Mesa mesa = (Mesa) o;
+        return idMesa != null && idMesa.equals(mesa.idMesa);
+    }
 
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
