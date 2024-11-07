@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html  lang="en" xmlns="http://www.w3.org/1999/xhtml" 
+xmlns:th="http://www.thymeleaf.org" 
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="apple-touch-icon" sizes="76x76" href="../img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../img/favicon.png">
+    <title>Ajuda FoodFLow</title>
+    <link href="../css/suporte.css" rel="stylesheet">
+    <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
+</head>
+<body>
+    <main>
+        <h1>Aqui Iremos Realizar suas Dúvidas Em relação a 
+            todas informações necessárias
+            para utilizar o nosso <b>sistema</b>.
+            </h1>
+            <h2 class="inicio">Mostraremos para voce todas as sessões e ícones para Realizar 
+                suas Tarefas em
+            nosso Sistema</h2>
+        <div class="inicio">
+        </div> 
+        <section class="lateral">
+            <p>1) Após Realizar o seu login em nosso sistema ao lado em baixo do 
+                ícone e nome
+Food Flow ’s estará todas as sessões do nosso sistema incluindo elas Pedidos,
+Menu, Mesa, Funcionário e Sair caso queira Deslogar sua conta.</p>
+            <img src="imagens\img.jpg" alt="Foto do menu lateral">
+        </section>
+        <section class="pedidos">
+            <p>2) Na Sessão de pedidos o usuário o usuário irá preenche as 
+                informações que o
+                cliente escolheu no Menu, sendo necessário o número da mesa, 
+                seu Status e o
+                Tempo estimado!</p>
+            <img src="imagens\pedidos.png" alt="Foto do menu">
+        </section>
+        <section class="menu">
+            <p>3) Na sessão de Menu (Cardápio do dia) o usuário irá 
+                preenche Todas as Comidasque estão sendo Feitas no Dia, 
+                sendo preenchido o Título,
+                a sua descrição e o Seu valor!</p>
+                <img src="imagens\menu.png" alt="Foto do menu">
+        </section>
+        <section class="mesa">
+            <p>4) Na sessão de Mesa o usuário irá preencher a Numeração da 
+                    Mesa e A
+                    quantidade(Capacidade) de pessoas que possuir!
+            </p>
+            {% comment %} <img src="imagens\mesas.png" alt="Foto do menu"> {% endcomment %}
+        </section>
+        <section class="funcionarios">
+            <p>5) Na sessão de Funcionários o usuário irá visualizar o seu ID, 
+                E-MAIL, Função e
+                seu Perfil podendo modificar caso possua a Senha!</p>
+            <img src="imagens\funcionarios.png" alt="Foto do menu funcionarios">
+            <img src="imagens\editarfunc.png" alt="Foto do menu editar Funcionário">
+        </section>
+    </main>
+    <!--   Core JS Files   -->
+  <script src="../js/core/popper.min.js"></script>
+  <script src="../js/core/bootstrap.min.js"></script>
+  <script src="../js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../js/plugins/smooth-scrollbar.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../js/material-dashboard.min.js?v=3.1.0"></script>
+    
+</body>
+</html>

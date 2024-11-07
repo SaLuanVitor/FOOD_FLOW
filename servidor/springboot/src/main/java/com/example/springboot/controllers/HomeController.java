@@ -18,6 +18,11 @@ public class HomeController {
         return "home"; // Correspondendo ao nome do arquivo home.html
     }
 
+    @GetMapping("/ajuda")
+    public String ajuda() {
+        return "ajuda"; // Correspondendo ao nome do arquivo home.html
+    }
+
     @GetMapping("/login")
     public String login() {
         return "login"; // Correspondendo ao nome do arquivo login.html
