@@ -7,36 +7,70 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.example.springboot.dto.PerfRecordsDto;
+import com.example.springboot.models.Mesa;
 import com.example.springboot.models.Perfil;
 import com.example.springboot.repositories.PerfRepository;
 
 import jakarta.validation.Valid;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PutMapping;
-
-@RestController
+@Controller
 public class PerfilController {
 
     @Autowired
     PerfRepository perfRepository;
 
-    // POST PARA CRIAR Perfil
-    @PostMapping("/Perfil")
-    public ResponseEntity<Perfil> savePerf(@RequestBody @Valid PerfRecordsDto PerfRecordsDto) {
+     @GetMapping("/perfis")
+    public String getAllPerfisPage(final Model model) {
+        List<Perfil> perfis = perfRepository.findAll();
+        model.addAttribute("perfis", perfis);
+        return "perfil/perfis";
+    }
 
-        var Perfil = new Perfil();
+      @GetMapping("/perfil/adicionar")
+    public String addNewMesa(Model model) {
+        model.addAttribute("perfil", new Perfil());
+        return "perfil/adicionar";
+    }
 
-        BeanUtils.copyProperties(PerfRecordsDto, Perfil);
+    @PostMapping("/perfil/salvar")
+    public String savePerfil(@ModelAttribute("perfil") Perfil perfil) {
+        perfRepository.save(perfil);
+        return "redirect:/perfis";
+    }
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(perfRepository.save(Perfil));
+    @GetMapping("/perfil/atualizar/{id}")
+    public String updateMesa(@PathVariable(value = "id") Long id, Model model) {
+        Optional<Perfil> perfilOpt = perfRepository.findById(id);
+        if (perfilOpt.isPresent()) {
+            model.addAttribute("perfil", perfilOpt.get());
+            return "perfil/atualizar";
+        } else {
+            model.addAttribute("message", "Perfil não encontrado.");
+            return "redirect:/perfis";
+        }
+    }
+
+
+    @GetMapping("/perfil/excluir/{id}")
+    public String deleteMesaById(@PathVariable(value = "id") Long id, Model model) {
+        if (perfRepository.existsById(id)) {
+            perfRepository.deleteById(id);
+            model.addAttribute("message", "Perfil excluído com sucesso!");
+        } else {
+            model.addAttribute("message", "Perfil não encontrado.");
+        }
+        return "redirect:/perfis";
     }
 
     // GET PARA OBTER TODOS OS PerfilS

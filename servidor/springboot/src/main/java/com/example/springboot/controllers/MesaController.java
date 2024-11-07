@@ -38,8 +38,8 @@ public class MesaController {
     }
 
     @PostMapping("/mesas/salvar")
-    public String saveMesa(@ModelAttribute("mesas") Mesa mesas) {
-        mesaRepository.save(mesas);
+    public String saveMesa(@ModelAttribute("mesa") Mesa mesa) {
+        mesaRepository.save(mesa);
         return "redirect:/mesas";
     }
 

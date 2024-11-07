@@ -1,0 +1,47 @@
+h1,h2 {
+    text-align: center;
+    font-family: sans-serif;
+    /* padding-top: 1rem; */
+    
+}
+
+body {
+    background-color: #d4a648;
+    font-family: sans-serif;
+}
+
+p {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.inicio p {
+    
+    text-align: center;
+    margin: auto;
+}
+
+main {
+    width: 80%;
+    background-color: rgb(255, 255, 255);
+    margin: auto;
+    max-width: 1000px;
+    border-radius: 20px;
+    padding: 30px;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 95%;
+    padding-bottom: 15px;
+}
+
+.lateral img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}
+
