@@ -1,6 +1,7 @@
 package com.example.springboot.models;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
 
@@ -13,6 +14,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,23 +23,48 @@ import jakarta.persistence.Table;
 
 public class Pedido implements Serializable {
 
-    private static final Long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPedido;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idMesa")
     private Mesa mesa;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "idFuncionario")
     private Funcionarios funcionario;
+
     private String Status;
+
     private LocalTime tempoPreparo;
+
+    private LocalDateTime dataStatus; // Campo com comportamento de atualização automática
 
     @ManyToMany
     @JoinTable(name = "pedido_item_menu", joinColumns = @JoinColumn(name = "idPedido"), inverseJoinColumns = @JoinColumn(name = "idMenu"))
-    Set<Menu> itensMenu;
+    private Set<Menu> itensMenu;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dataStatus = LocalDateTime.now(); // Define a data atual ao criar
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.dataStatus = LocalDateTime.now(); // Atualiza a data ao modificar
+    }
+
+    // Getters e Setters
+    public LocalDateTime getDataStatus() {
+        return dataStatus;
+    }
+
+    public void setDataStatus(LocalDateTime dataStatus) {
+        this.dataStatus = dataStatus;
+    }
 
     public static Long getSerialversionuid() {
         return serialVersionUID;

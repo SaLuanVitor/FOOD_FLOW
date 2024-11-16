@@ -116,7 +116,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="card-body">
-        <form action="#" th:action="@{/pedidos/salvar}" th:object="${pedido}" method="POST" role="form" class="text-start">
+        <form action="#" th:action="@{/pedidos/atualizar}" th:object="${pedido}" method="POST" role="form" class="text-start">
           <label>Mesa</label>
           <div class="input-group input-group-outline my-3">
             <input type="hidden" th:field="*{idPedido}" />            
