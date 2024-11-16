@@ -92,6 +92,8 @@ public class FuncController {
                 // Login bem-sucedido
                 funcionarioLogado = funcionario;
                 session.setAttribute("logado", nome);
+                session.setAttribute("perfil", funcionario.getPerfil()); // Pode ser útil se precisar do objeto Perfil
+                session.setAttribute("idPerfil", funcionario.getPerfil().getIdPerfil()); // Atribuindo o idPerfil
 
                 // Verificar o perfil do usuário
                 Perfil perfil = funcionario.getPerfil(); // Supondo que exista um método getPerfil() na sua classe
@@ -99,9 +101,7 @@ public class FuncController {
                 return ResponseEntity.status(HttpStatus.OK).body(Map.of(
                         "mensagem", "Login bem-sucedido!",
                         "perfil", perfil, // Incluindo o perfil no retorno
-                        "funcao", funcionario.getFuncao()
-
-                ));
+                        "funcao", funcionario.getFuncao()));
             } else {
                 // Senha incorreta
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Senha incorreta!");
