@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "GER_PEDIDO_MENU")

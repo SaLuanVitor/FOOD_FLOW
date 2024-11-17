@@ -24,22 +24,18 @@ public class DatabaseInitializer {
         return args -> {
             String adminNome = "adminFlow";
             String adminSenha = "floow123";
-            String perfilDescricao = "Administrador";
+            String adminPerfilDescricao = "Administrador";
+            String garcomPerfilDescricao = "Garçom";
+            String cozinhaPerfilDescricao = "Cozinha";
 
-            Perfil perfilAdmin;
-            if (perfilRepository.findByDescricao(perfilDescricao).isEmpty()) {
+            // Criar o perfil Administrador
+            Perfil perfilAdmin = criarPerfilSeNaoExistir(adminPerfilDescricao);
 
-                perfilAdmin = new Perfil();
-                perfilAdmin.setDescricao(perfilDescricao);
-                perfilAdmin = perfilRepository.save(perfilAdmin);
+            // Criar os perfis Garçom e Cozinha
+            criarPerfilSeNaoExistir(garcomPerfilDescricao);
+            criarPerfilSeNaoExistir(cozinhaPerfilDescricao);
 
-                System.out.println("Perfil " + perfilDescricao + " criado com sucesso!");
-            } else {
-                perfilAdmin = perfilRepository.findByDescricao(perfilDescricao).get();
-
-                System.out.println("Perfil " + perfilDescricao + " já existe. Usando perfil existente.");
-            }
-
+            // Criar o funcionário Admin
             if (funcionariosRepository.findByNome(adminNome).isEmpty()) {
                 Funcionarios admin = new Funcionarios();
                 admin.setNome(adminNome);
@@ -54,5 +50,15 @@ public class DatabaseInitializer {
                 System.out.println("Funcionário " + adminNome + " já existe. Nenhuma ação necessária.");
             }
         };
+    }
+
+    private Perfil criarPerfilSeNaoExistir(String descricao) {
+        return perfilRepository.findByDescricao(descricao).orElseGet(() -> {
+            Perfil perfil = new Perfil();
+            perfil.setDescricao(descricao);
+            perfilRepository.save(perfil);
+            System.out.println("Perfil " + descricao + " criado com sucesso!");
+            return perfil;
+        });
     }
 }
