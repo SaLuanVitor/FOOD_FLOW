@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.0.2  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="mais_vendidos" pageWidth="595" pageHeight="842" whenNoDataType="NoDataSection" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="fa36b62d-7cc1-45d5-8268-6ecd003b7034">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+       coalesce (m.titulo, '-') AS item_menu, 
+       coalesce( SUM(pi.id_pedido) , 0 )AS quantidade_vendida
+    FROM pedido_item_menu pi
+    left join ger_menu m ON pi.id_menu = m.id_menu
+    left join ger_pedido p ON pi.id_pedido = p.id_pedido
+    left join ger_historico_pedido h ON p.id_pedido = h.id_pedido
+    GROUP BY m.titulo
+    ORDER BY quantidade_vendida DESC]]>
+	</queryString>
+	<field name="item_menu" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="item_menu"/>
+		<property name="com.jaspersoft.studio.field.label" value="item_menu"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="ger_menu"/>
+	</field>
+	<field name="quantidade_vendida" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="quantidade_vendida"/>
+		<property name="com.jaspersoft.studio.field.label" value="quantidade_vendida"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="92" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="280" y="33" width="274" height="30" uuid="0a8e6ac1-112b-493a-8cc3-9ccee70de21a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total vendido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="33" width="280" height="30" uuid="eec6abb6-ca1e-4c69-90ec-9c522e031e14"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Item]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="63" width="280" height="29" uuid="07899dd5-408a-48ea-9b20-23c05fda3dae">
+					<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.spacingAfter" value="px"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph leftIndent="5" rightIndent="5" spacingBefore="5" spacingAfter="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{item_menu}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="280" y="63" width="274" height="29" uuid="e2cceb6c-b019-45eb-aa46-091d189e07fc">
+					<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.spacingAfter" value="px"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph leftIndent="5" rightIndent="5" spacingBefore="5" spacingAfter="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantidade_vendida}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="2" width="554" height="31" forecolor="#FFFFFF" backcolor="#C76F34" uuid="b00ca7ff-400a-4945-8a0a-303f207b929a">
+					<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+					<paragraph spacingBefore="10"/>
+				</textElement>
+				<text><![CDATA[Itens mais Vendidos]]></text>
+			</staticText>
+		</band>
+	</detail>
+</jasperReport>
