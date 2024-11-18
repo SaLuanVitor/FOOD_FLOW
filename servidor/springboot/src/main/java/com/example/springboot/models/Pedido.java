@@ -119,7 +119,7 @@ public class Pedido implements Serializable {
     }
 
     public Object getAuthority() {
-        // TODO Auto-generated method stub
+
         throw new UnsupportedOperationException("Unimplemented method 'getAuthority'");
     }
 
