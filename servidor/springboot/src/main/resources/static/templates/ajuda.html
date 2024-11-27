@@ -17,13 +17,13 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <!-- Nucleo Icons -->
   <link href="../css/nucleo-icons.css" rel="stylesheet" />
   <link href="../css/nucleo-svg.css" rel="stylesheet" />
+  <link th:href="@{/css/styles.css}" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- Material Icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
   <!-- CSS Files -->
   <link id="pagestyle" href="../css/material-dashboard.css?v=3.1.0" rel="stylesheet" />
-  <link th:href="@{/css/styles.css}" rel="stylesheet" />
   <!-- Nepcha Analytics (nepcha.com) -->
   <!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
@@ -41,8 +41,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
-        <li class="nav-item" th:if="${session.idPerfil == 1 or session.idPerfil == 2 or session.idPerfil == 3}">
-          <a class="nav-link text-white" href="/pedidos">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/pedidos" target="_self">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -50,8 +50,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
           </a>
         </li>
 
-        <li class="nav-item" th:if="${session.idPerfil == 1 or session.idPerfil == 3}">
-          <a class="nav-link text-white active bg-danger" href="/menu">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/menu">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -59,7 +59,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
           </a>
         </li>
 
-        <li class="nav-item" th:if="${session.idPerfil == 1 or session.idPerfil == 2}">
+        <li class="nav-item">
           <a  class="nav-link text-white " href="/mesas">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
@@ -69,7 +69,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
         </li>
         
        
-        <li class="nav-item" th:if="${session.idPerfil == 1}">
+        <li class="nav-item">
           <a class="nav-link text-white " href="/funcionarios">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
@@ -88,7 +88,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-white " href="/ajuda">
+          <a  class="nav-link text-white active bg-danger" href="/ajuda">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">help</i>
             </div>
@@ -110,12 +110,10 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     
   </aside>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-    <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">         
-          <h6 class="font-weight-bolder mb-0">Gerenciamento do menu</h6>
-        </nav>
+       
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
             
@@ -132,60 +130,18 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
         </div>
       </div>
     </nav>
-    <!-- End Navbar -->
-    <div class="container-fluid py-4">
-      <div class="row">
-        <div class="col-12">
-          <div class="card my-4">
-            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-              <div class="bg-gradient-danger shadow-danger border-radius-lg pt-4 pb-3">
-                <h6 class="text-white text-capitalize ps-3">Menu</h6>
-              </div>
-            </div>
+  
+    <div style="text-align: center; padding-top: 10%;" >
+      <img style="height: 100px; width: 100px;" src="../img/ajuda.png" alt="ajuda_logo">
+      <h5>Em caso de dúvidas, clique no botão abaixo para obter mais informações e suporte.</h5>
+       <a href="mailto:foodflows@support.com"> Contate-nos </a>
+      <a class="btn btn-success mb-3" title="Contate-nos"  href="http://localhost:8080/suporte" role="button" target="_blank">       
+        Clique aqui para mais informações
+      </a>
+     
+    </div>
 
-            <div class="card-body px-0 pb-2">
-              <div class="col-12">
-                <a style="margin-left: 20px;" class="btn btn-success mb-3" title="Novo" href="menu/adicionar" role="button">       
-                  <i class="material-icons opacity-10">add</i> 
-                </a>
-              </div>
-              </div>
-            
-            <div class="card-body px-0 pb-2">
-              <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Título</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Descrição</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Preço</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th>                      
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"></th> 
-                    </tr>
-                  </thead>
-                 
-                  <tbody>
-                    <tr th:each="menu : ${menus}">                                      
-                      <td th:text="${menu.titulo}" class="align-middle text-center text-sm"></td>
-                      <td th:text="${menu.descricao}" class="align-middle text-center text-sm"></td>
-                      <td th:text="${menu.preco}" class="align-middle text-center text-sm"></td>
-                      <td> <a th:href="@{/menu/atualizar/{id}(id=${menu.idMenu})}"
-                            class="btn btn-info" title="Editar">
-                            <i class="material-icons opacity-10">edit</i> 
-                          </a>                       
-                      </td>
-                      <td> 
-                        <a th:href="@{/menu/excluir/{id}(id=${menu.idMenu})}"
-                        class="btn btn-danger" title="Deletar">
-                        <i class="material-icons opacity-10">delete</i> 
-                      </a>
-                  </td>
-                    </tr>
-                  </tbody>
-                  </table>
-                  </div>
-                  </div>
-                  
+  </main>    
                    
   <!--   Core JS Files   -->
   <script src="../js/core/popper.min.js"></script>

@@ -17,6 +17,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <!-- Nucleo Icons -->
   <link th:href="@{/css/nucleo-icons.css}" rel="stylesheet" />
   <link th:href="@{/css/nucleo-svg.css}" rel="stylesheet" />
+  <link th:href="@{/css/styles.css}" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <!-- Material Icons -->
@@ -28,11 +29,11 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
 </head>
 
-<body  class="g-sidenav-show  bg-gray-200">
+<body class="g-sidenav-show bg-gray-200">
   <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-dark" id="sidenav-main">
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="/home" target="_blank">
+      <a class="navbar-brand m-0"  target="_blank">
         <img th:src="@{/img/logo.png}" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold text-white">Food Flow's</span>
       </a>
@@ -40,8 +41,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse w-auto" id="sidenav-collapse-main">
       <ul class="navbar-nav">
-        <li class="nav-item" th:if="${session.idPerfil == 1 or session.idPerfil == 2 or session.idPerfil == 3}">
-          <a class="nav-link text-white" href="/pedidos">
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/pedidos">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -49,8 +50,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
           </a>
         </li>
 
-        <li class="nav-item" th:if="${session.idPerfil == 1 or session.idPerfil == 3}">
-          <a class="nav-link text-white active bg-gradient-danger" href="/menu">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="/menu">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -58,8 +59,8 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
           </a>
         </li>
 
-        <li class="nav-item" th:if="${session.idPerfil == 1 or session.idPerfil == 2}">
-          <a  class="nav-link text-white " href="/mesas">
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/mesas">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
@@ -68,7 +69,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
         </li>
         
        
-        <li class="nav-item" th:if="${session.idPerfil == 1}">
+        <li class="nav-item">
           <a class="nav-link text-white " href="/funcionarios">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">person</i>
@@ -78,7 +79,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
         </li>
 
         <li class="nav-item">
-          <a class="nav-link text-white " href="/perfis">
+          <a class="nav-link text-white active bg-danger" href="/perfis">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">people</i>
             </div>
@@ -106,21 +107,22 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
       </ul>
     </div>
+    
   </aside>
 
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
     <!-- Navbar -->
     <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
       <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">       
-          <h6 class="font-weight-bolder mb-0">Adicionar item</h6>
+        <nav aria-label="breadcrumb">
+          <h6 class="font-weight-bolder mb-0">Editar perfil</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
           </div>
           <ul class="navbar-nav justify-content-end">
             <li class="nav-item d-flex align-items-center">
-              <a th:href="@{/sign-in}" class="nav-link text-body font-weight-bold px-0">
+              <a th:href="@{/templates/sign-in.html}" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
                 <span class="d-sm-inline d-none"></span>
               </a>
@@ -132,45 +134,40 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="card-body">
-        <form action="#" th:action="@{/menu/salvar}" th:object="${menu}" method="POST" role="form" class="text-start">
-          <label>Título</label>
+        <form action="#" th:action="@{/perfil/salvar}" th:object="${perfil}" method="POST" role="form" class="text-start">
+          <label>Perfil</label>
           <div class="input-group input-group-outline my-3">
-            <input type="text" th:field="*{titulo}" class="form-control">
+            <input type="hidden" th:field="*{idPerfil}" />            
+            <label>Descrição</label>
+            <div class="input-group input-group-outline mb-3">
+              <input type="text" th:field="*{descricao}" class="form-control">
+            </div>
           </div>
-          <label >Descrição</label>
-          <div class="input-group input-group-outline my-3">
-            <input type="text" th:field="*{descricao}" class="form-control">
-          </div>
-          <label>Preço</label>
-          <div class="input-group input-group-outline my-3">           
-            <input type="number"step="0.01"  th:field="*{preco}" class="form-control">
-          </div>                 
+
           <div class="text-center">
             <button type="submit" class="btn bg-danger w-100 my-4 mb-2">Salvar</button>
           </div>
-        </form>
+        </form>   
       </div>
     </div>
-  </main>
 
-  <!-- Core JS Files -->
-  <script th:src="@{/js/core/popper.min.js}"></script>
-  <script th:src="@{/js/core/bootstrap.min.js}"></script>
-  <script th:src="@{/js/plugins/perfect-scrollbar.min.js}"></script>
-  <script th:src="@{/js/plugins/smooth-scrollbar.min.js}"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
+    <!-- Core JS Files -->
+    <script th:src="@{/js/core/popper.min.js}"></script>
+    <script th:src="@{/js/core/bootstrap.min.js}"></script>
+    <script th:src="@{/js/plugins/perfect-scrollbar.min.js}"></script>
+    <script th:src="@{/js/plugins/smooth-scrollbar.min.js}"></script>
+    <script>
+      var win = navigator.platform.indexOf('Win') > -1;
+      if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+          damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
       }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
-  <script th:src="@{/js/material-dashboard.min.js?v=3.1.0}"></script>
-</body>
-
+    </script>
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->
+    <script th:src="@{/js/material-dashboard.min.js?v=3.1.0}"></script>
+  </body>
 </html>

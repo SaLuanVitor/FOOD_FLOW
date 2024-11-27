@@ -1,4 +1,7 @@
+<<<<<<< HEAD
+=======
 {
     "java.compile.nullAnalysis.mode": "disabled",
     "java.configuration.updateBuildConfiguration": "interactive"
 }
+>>>>>>> 903f25fde7a9268d5e1da13920b09d0a4c356a68

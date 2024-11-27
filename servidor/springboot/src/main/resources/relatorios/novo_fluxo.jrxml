@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.17.0.final using JasperReports Library version 6.0.2  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="novo_fluxo" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3fe7d463-e0d7-4cb4-b39e-532b00723453">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="273"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="715"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="DataAdapter.xml"/>
+	<parameter name="subreport" class="net.sf.jasperreports.engine.JasperReport"/>
+	<parameter name="img_logo" class="java.io.BufferedInputStream" isForPrompting="false"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT 
+        coalesce(SUM(m.preco), 0) AS total_vendas, 
+        coalesce(COUNT(p.id_pedido) , 0) AS quantidade_pedidos
+    FROM    
+    ger_pedido p
+	INNER JOIN 
+    ger_pedido_menu pm ON pm.id_pedido = p.id_pedido
+	INNER JOIN 
+    ger_menu m ON pm.id_menu = m.id_menu 
+	inner join ger_historico_pedido h ON p.id_pedido = h.id_pedido
+    WHERE 
+    MONTH(h.data_historico) = MONTH(CURRENT_DATE) 
+	AND YEAR(h.data_historico) = YEAR(CURRENT_DATE)]]>
+	</queryString>
+	<field name="total_vendas" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.name" value="total_vendas"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_vendas"/>
+	</field>
+	<field name="quantidade_pedidos" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="quantidade_pedidos"/>
+		<property name="com.jaspersoft.studio.field.label" value="quantidade_pedidos"/>
+	</field>
+	<background>
+		<band height="802" splitType="Stretch">
+			<image>
+				<reportElement x="30" y="165" width="479" height="590" uuid="174dab0e-551d-45f7-8c4e-c87028817022"/>
+				<imageExpression><![CDATA["C:/Users/mylyy/Desktop/FoodFlow2.0/FOOD_FLOW/servidor/springboot/src/main/resources/static/img/pagina_inicial.png"]]></imageExpression>
+			</image>
+		</band>
+	</background>
+	<title>
+		<band height="120" splitType="Stretch">
+			<staticText>
+				<reportElement x="180" y="40" width="375" height="50" uuid="01270409-6289-4217-8d32-bbfea768ad24"/>
+				<box padding="5">
+					<pen lineWidth="0.0" lineColor="#999999"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Justified">
+					<font fontName="SansSerif" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Sistema de Gerenciamento de Restaurantes]]></text>
+			</staticText>
+			<image hAlign="Center" vAlign="Middle">
+				<reportElement x="0" y="0" width="180" height="90" forecolor="#999999" uuid="6d54223e-92d1-4f59-8c32-bf24dafe0a6a"/>
+				<box topPadding="8" leftPadding="8" bottomPadding="8" rightPadding="8">
+					<pen lineWidth="1.0" lineColor="#050000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+				</box>
+				<imageExpression><![CDATA[$P{img_logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="180" y="0" width="375" height="40" uuid="12f99279-83e2-44c9-a998-049adf3e2d83"/>
+				<box>
+					<pen lineWidth="1.0" lineColor="#050000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[
+Foodsflow@internacional.com.br]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="90" width="555" height="30" uuid="e237c2f6-cdba-43e9-bdc4-61e39c8bbc45"/>
+				<box>
+					<pen lineColor="#999999"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relatório de Levantamento Mensal - " + (new java.text.SimpleDateFormat("MMMM", java.util.Locale.forLanguageTag("pt")).format(new java.util.Date())).substring(0, 1).toUpperCase() + 
+(new java.text.SimpleDateFormat("MMMM", java.util.Locale.forLanguageTag("pt")).format(new java.util.Date())).substring(1)]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="127" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="67" width="280" height="30" uuid="3bd73f39-5386-4ed8-97ea-5ca837bde0f4"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantidade de Pedidos]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="280" y="97" width="274" height="29" uuid="f0b27a50-a2c8-4846-b918-497f117680fe">
+					<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.spacingAfter" value="px"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph leftIndent="5" rightIndent="5" spacingBefore="5" spacingAfter="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_vendas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="97" width="280" height="29" uuid="a9c6e327-802c-497e-951d-35ac0511f1a0">
+					<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+					<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.rightIndent" value="px"/>
+					<property name="com.jaspersoft.studio.unit.spacingAfter" value="px"/>
+				</reportElement>
+				<box padding="1">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<paragraph leftIndent="5" rightIndent="5" spacingBefore="5" spacingAfter="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{quantidade_pedidos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="36" width="554" height="31" forecolor="#FFFFFF" backcolor="#C76F34" uuid="df2d818e-7983-484d-8059-4ba886b2bfa7">
+					<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#050000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+					<paragraph spacingBefore="10"/>
+				</textElement>
+				<text><![CDATA[Resumo de Vendas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="280" y="67" width="274" height="30" uuid="f242c9b2-6552-43fd-a1bb-ca2c656753cc"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total vendido]]></text>
+			</staticText>
+		</band>
+		<band height="100">
+			<subreport>
+				<reportElement x="0" y="10" width="555" height="90" uuid="5aa54c11-8485-45ec-9b52-2d193af84266"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{subreport}]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="50">
+			<textField>
+				<reportElement x="350" y="20" width="204" height="30" uuid="9320d046-d3e2-46fc-bee5-0cc7d62d2f41"/>
+				<textFieldExpression><![CDATA["Horário de impressão: " + new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm").format(new java.util.Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
